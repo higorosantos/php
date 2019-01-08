@@ -5,8 +5,8 @@
 </head>
 
 <body>
-    <form method="POST" action="recebe.php">
-        <input type="text" id="texto" name="texto" size="10">
+    <form method="GET" action="recebe.php">
+        <input type="text" id="texto" name="texto" size="10" required>
         <br>
         <input type="submit" id="sub" name="sub" value="Enviar!!">
 </body>

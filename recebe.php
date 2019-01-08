@@ -1,6 +1,6 @@
 <?php
- echo "O Texto digitado foi: ",$_POST["texto"];
- if($_POST["texto"] == "Higor Oliveira"){
+ echo "O Texto digitado foi: ",$_GET["texto"];
+ if($_GET["texto"] == "Higor Oliveira"){
      echo "<br>Senha Correta";
  }
  else{
