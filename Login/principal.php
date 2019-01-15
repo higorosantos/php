@@ -16,7 +16,6 @@ if ((($_SESSION['pri']) == "Master" || ($_SESSION['pri']) == "Usuario") && $_SES
 <section>
 <div class="container">
 
-	
 		<div class="row mbr-justify-content-center">
         <a href="usuarios.php"
             <div class="col-lg-6 mbr-col-md-10">

@@ -47,6 +47,11 @@ if ((($_SESSION['pri']) == "Master" || ($_SESSION['pri']) == "Usuario") && $_SES
             if(document.getElementById("user").value == ""){
                 alert("Campo Usuario Vazio,por favor preencha!");
         }
+        else {
+            document.form1.action = "usuario_consultar.php";
+            document.form1.submit();
+        }
+
         }
 </script>
 
