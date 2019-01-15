@@ -17,13 +17,19 @@ if($resultado == 0){
     echo "<script>window.location='index.php';</script>";
 }
 else {
-    $registro = mysqli_fetch_row($query);
+   $registro = mysqli_fetch_row($query);
    $login = $registro[0];
    $senha = $registro[1];
    $privilegio = $registro[2];
    $_SESSION["pri"] = $privilegio;
-   echo "<script>alert('Bem Vindo Ao Sistema');</script>";
+   if($privilegio == "Master"){
+   echo "<script>alert('Bem Vindo Ao Sistema Administrador');</script>";
    echo "<script>window.location='principal.php';</script>";
 }
+  else if($privilegio == "Usuario"){
+    echo "<script>alert('Bem Vindo Ao Sistema Usuario');</script>";
+    echo "<script>window.location='principal.php';</script>";
 
+  }
+}
 ?>
