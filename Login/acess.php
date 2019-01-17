@@ -8,6 +8,7 @@ $resultado = NULL;
 $query = NULL;
 $senha = $_POST["senha"];
 $login = $_POST["login"];
+$acao = NULL;
 
 $query = mysqli_query($conect, "SELECT * from acesso  WHERE login  = '$login' AND senha ='$senha' ") or die(mysqli_error());
 $resultado = mysqli_num_rows($query);

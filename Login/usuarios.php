@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ((($_SESSION['pri']) == "Master" || ($_SESSION['pri']) == "Usuario") && $_SESSION["acesso"] == 1){
+if ($_SESSION['pri'] == "Master" && $_SESSION["acesso"] == 1){
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,12 +29,12 @@ if ((($_SESSION['pri']) == "Master" || ($_SESSION['pri']) == "Usuario") && $_SES
     </ul>
   </div>
 </nav>
-    <form class="form-inline container jumbotron" method="POST" action="#">
+    <form class="form-inline container jumbotron" name="form1" method="POST" action="#">
         <div class="form-group mx-sm-3 mb-2">
             <label for="user" class="sr-only">Usuario</label>
-             <input type="text" class="form-control" id="user" placeholder="Digite o usuario">
+             <input type="text" class="form-control" name="login" id="login" placeholder="Digite o usuario">
          </div>
-        <button type="button" class="btn btn-primary mb-2 buttone" onclick="pesquisar()" >Pesquisar</button>
+        <button type="button" class="btn btn-primary mb-2 buttone" onclick="f_consultarr()" >Pesquisar</button>
         <button type="button" class="btn btn-primary mb-2 buttone" onclick="excluir()" >Excluir</button>
         <button type="button" class="btn btn-primary mb-2 buttone" onclick="cadastrar()" >Cadastrar</button>
         <button type="button" class="btn btn-primary mb-2 buttone" onclick="modificar()" >Modificar</button>
@@ -42,23 +42,34 @@ if ((($_SESSION['pri']) == "Master" || ($_SESSION['pri']) == "Usuario") && $_SES
     </body>
    
 </html>
-<script>
-        function pesquisar(){
-            if(document.getElementById("user").value == ""){
-                alert("Campo Usuario Vazio,por favor preencha!");
+<script type="text/javascript" language="javascript">
+       function f_consultarr(){
+			if(document.form1.login.value==""){
+				alert("Necessário Preencher o Campo LOGIN");
+			}
+			else{
+				document.form1.action = "usuario_consultar.php";
+				document.form1.submit();
+			}
         }
-        else {
-            document.form1.action = "usuario_consultar.php";
-            document.form1.submit();
-        }
+        function cadastrar(){
+			if(document.form1.login.value==""){
+				alert("Necessário Preencher o Campo LOGIN");
+			}
+			else{
+				document.form1.action = "usuario_incluir.php";
+				document.form1.submit();
+			}
+		}
 
-        }
+
+        
 </script>
 
 
 <?php 
 }
     else{
-     echo "<script>window.location='index.php';</script>";
+     echo "<script>window.location='403.php';</script>";
 }
 ?>

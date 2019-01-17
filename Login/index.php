@@ -1,4 +1,4 @@
-<?php
+ <?php
 session_start();
 unset ($_SESSION["pri"]);
 unset ($_SESSION["acesso"]);
@@ -49,6 +49,7 @@ unset ($_SESSION["acesso"]);
         <a href="reset.html">Esqueceu sua senha?</a>
 </div>
         <button type="submit" class="btn btn-primary">Login</button>
+        
 
     </form>
     </div>

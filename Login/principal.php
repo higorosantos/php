@@ -15,10 +15,9 @@ if ((($_SESSION['pri']) == "Master" || ($_SESSION['pri']) == "Usuario") && $_SES
 <body>
 <section>
 <div class="container">
-
 		<div class="row mbr-justify-content-center">
-        <a href="usuarios.php"
-            <div class="col-lg-6 mbr-col-md-10">
+        <a href="usuarios.php" 
+            <div class="col-lg-6 mbr-col-md-10" id="usuario"> 
                 <div class="wrap">
                     <div class="ico-wrap">
                         <span class="mbr-iconfont fa-volume-up fa"></span>
@@ -30,7 +29,6 @@ if ((($_SESSION['pri']) == "Master" || ($_SESSION['pri']) == "Usuario") && $_SES
                 </div>
             </div>
             </a>       
-            
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div class="ico-wrap">
