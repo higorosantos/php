@@ -47,12 +47,19 @@ if ($_SESSION["pri"] == "Master"  && $_SESSION["acesso"] == 1){
 				if(isset($_POST["cancelar"])){	
 				  echo "<script>location.href='usuarios.php';</script>";
 				}
+				if(isset($_POST["incluir"])){
+					$login = $_POST["login"];
+					$senha = $_POST["senha"];
+					$privilegio = $_POST["privilegio"];
+					$query = mysqli_query($conect,"INSERT INTO acesso VALUES ('$login','$senha','$privilegio')")or die(mysql_error());
+          echo "<script>alert('Usuario Cadastrado com sucesso!');</script>";
+				}
 				 
 				if(isset($_POST["acao"])){
 					switch ($_POST["acao"]){
 						case "consultar":
 							$login = $_POST["login1"];
-							$query = mysqli_query($conect,"SELECT * FROM acesso WHERE login = '$login'") or die(mysql_error());       
+							$query = mysqli_query($conect,"SELECT * FROM acesso WHERE login = '$login'") or die(mysql_error());  
 							$result = mysqli_num_rows($query);
 							if($result == 0){
                                 ?>
@@ -60,7 +67,7 @@ if ($_SESSION["pri"] == "Master"  && $_SESSION["acesso"] == 1){
 								<h2 class="form-signin-heading">Dados do Evento - Consultar</h2>
 								<center>
 								<label for="inputLogin" >Login</label>
-								<input type="text" name="login" id="login" class="form-control" style ='width:150px;text-align:center'" readonly /></br>
+								<input type="text" name="login" id="login" class="form-control" style ='width:150px;text-align:center' value="<?php echo $login;?>" readonly/></br>
 								<label for="inputEvento" >Senha</label>
 								<input type="password" name="senha" id="senha" class="form-control" style ='width:150px;text-align:center'"  /></br>	
 								<label for="inputEvento" >Privilégio</label>
