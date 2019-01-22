@@ -61,6 +61,23 @@ if ($_SESSION['pri'] == "Master" && $_SESSION["acesso"] == 1){
 				document.form1.submit();
 			}
 		}
+        function excluir(){
+            if(document.form1.login.value==""){
+				alert("Necessário Preencher o Campo LOGIN");
+			}
+			else{
+				document.form1.action = "usuario_excluir.php";
+				document.form1.submit();
+			}
+        } function modificar(){
+            if(document.form1.login.value==""){
+				alert("Necessário Preencher o Campo LOGIN");
+			}
+			else{
+				document.form1.action = "usuario_alterar.php";
+				document.form1.submit();
+			}
+        }
 
 
         

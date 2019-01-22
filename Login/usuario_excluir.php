@@ -18,7 +18,7 @@ if ($_SESSION["pri"] == "Master"  && $_SESSION["acesso"] == 1){
     </head>
   <body onLoad="checar('consultar');">
 	<form name="form1" method= "POST" action="#">
-	<input type="hidden" name="login1" id="login1" value="<?php echo $_POST['login']; ?>" />
+		<input type="hidden" name="login1" id="login1" value="<?php echo $_POST['login']; ?>" />
 		<input type="hidden" name="acao" id="acao"/>
 	</form>
 	
@@ -47,50 +47,45 @@ if ($_SESSION["pri"] == "Master"  && $_SESSION["acesso"] == 1){
 				if(isset($_POST["cancelar"])){	
 				  echo "<script>location.href='usuarios.php';</script>";
 				}
-				if(isset($_POST["incluir"])){
-					$login = $_POST["login"];
-					$senha = $_POST["senha"];
-					$privilegio = $_POST["privilegio"];
-					$query = mysqli_query($conect,"INSERT INTO acesso VALUES ('$login','$senha','$privilegio')")or die(mysql_error());
-					echo "<script>alert('Usuario Cadastrado com sucesso!');</script>";
-					echo "<script>location.href='usuarios.php';</script>";
-				}
-				 
+				 if(isset($_POST["excluir"])){
+					 $login = $_POST["login"];
+					 $query = mysqli_query($conect,"DELETE FROM acesso WHERE login = '$login'") or die(mysql_error());
+					 echo "<script> alert('Usuario Removido com sucesso!'); </script>";
+					 echo "<script> window.location='usuarios.php';</script>"; 
+				 }
 				if(isset($_POST["acao"])){
 					switch ($_POST["acao"]){
 						case "consultar":
 							$login = $_POST["login1"];
-							$query = mysqli_query($conect,"SELECT * FROM acesso WHERE login = '$login'") or die(mysql_error());  
+							$query = mysqli_query($conect,"SELECT * FROM acesso WHERE login = '$login'") or die(mysql_error());       
 							$result = mysqli_num_rows($query);
 							if($result == 0){
-                                ?>
-                                <form class="form-signin" name="form1" id="form1" method="POST" action="#">
-								<h2 class="form-signin-heading">Dados do Evento - Consultar</h2>
-								<center>
-								<label for="inputLogin" >Login</label>
-								<input type="text" name="login" id="login" class="form-control" style ='width:150px;text-align:center' value="<?php echo $login;?>" readonly /></br>
-								<label for="inputEvento" >Senha</label>
-								<input type="password" name="senha" id="senha" class="form-control" style ='width:150px;text-align:center'  /></br>	
-								<label for="inputEvento" >Privilégio</label>
-                                <select type="text" name="privilegio" id="privilegio" class="form-control" style ='width:150px;text-align:center'  /></br>
-                                    <option value="Master">Master</option>
-                                    <option value="Usuario">Usuario</option>
-                                    </select><br>	
-                                <button  type="submit" name="incluir" id="incluir" style ='width:200px'/>Incluir</button>							
-								<button  type="submit" name="cancelar" id="cancelar" style ='width:200px'/>Retornar</button>
-								</center>
-                              </form>
-                              <?php					
+								echo "<script> alert('Usuário não Cadastrado!!'); </script>";
+								echo "<script> window.location='usuarios.php';</script>"; 					
 							}
 							else{
 								$registro = mysqli_fetch_row($query);
 								$login = $registro[0];
 								$senha = $registro[1];
 								$privilegio = $registro[2];
-								?>	
-						
-								
-							  
+								?>
+							<center>		
+						  <div id="tudo" style="border:2px black solid; margin: 80px 20%; padding-bottom: 20px ">
+								<form class="form-signin" name="form1" id="form1" method="POST" action="#">
+								<h2 class="form-signin-heading">Dados do Evento - Consultar</h2>
+								<center>
+								<label for="inputLogin"><strong>Login:</strong></label>
+								<input type="text" name="login" id="login" class="form-control" style ='width:auto;text-align:center' value="<?php echo $login;?>" readonly /></br><br>
+								<label for="inputEvento"><strong>Senha:</strong></label>
+								<input type="password" name="senha" id="senha" class="form-control" style ='width:auto;text-align:center' value="<?php echo $senha;?>" readonly /></br><br>	
+								<label for="inputEvento"><strong>Privilégio:</strong></label>
+								<input type="text" name="privilegio" id="privilegio" class="form-control" style ='width:150px;text-align:center' value="<?php echo $privilegio;?>" readonly /></br><br>									
+								<button  type="submit" name="cancelar" id="cancelar" style ='width:auto'/>Retornar</button>
+								<button  type="submit" name="excluir" id="excluir" style ='width:auto'/>Excluir</button>
+								</center>
+							  </form>	
+							</div>
+							</center>  
 								<?php
 							}						
 					}
