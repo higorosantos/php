@@ -28,7 +28,8 @@ if ((($_SESSION['pri']) == "Master" || ($_SESSION['pri']) == "Usuario") && $_SES
                     </div>
                 </div>
             </div>
-            </a>       
+            </a>
+            <a href="agenda.php"      
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div class="ico-wrap">
@@ -42,6 +43,7 @@ if ((($_SESSION['pri']) == "Master" || ($_SESSION['pri']) == "Usuario") && $_SES
                     </div>
                 </div>
             </div>
+           
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div class="ico-wrap">

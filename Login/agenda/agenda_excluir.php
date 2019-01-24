@@ -16,9 +16,10 @@ if ($_SESSION["pri"] == "Master"  && $_SESSION["acesso"] == 1){
             }
         </style>
     </head>
-  <body onLoad="checar('consultar');">
+		<body onLoad="checar('consultar');">
 	<form name="form1" method= "POST" action="#">
-	<input type="hidden" name="login1" id="login1" value="<?php echo $_POST['login']; ?>" />
+	<input type="hidden" name="data1" id="data1" value="<?php echo $_POST['data']; ?>" />
+    <input type="hidden" name="hora1" id="hora1" value="<?php echo $_POST['hora']; ?>" />
 		<input type="hidden" name="acao" id="acao"/>
 	</form>
 	
@@ -38,66 +39,55 @@ if ($_SESSION["pri"] == "Master"  && $_SESSION["acesso"] == 1){
 	  
       <div class="jumbotron" style ='font-size:16px'>
 		<?php 
-				include "config.php";
+				include "../config.php";
 			  		
 				$result = NULL;
 				$acao = NULL;
 				$query = NULL;  
 				
 				if(isset($_POST["cancelar"])){	
-				  echo "<script>location.href='usuarios.php';</script>";
-				}
-				if(isset($_POST["incluir"])){
-					$login = $_POST["login"];
-					$senha = $_POST["senha"];
-					$privilegio = $_POST["privilegio"];
-					$query = mysqli_query($conect,"INSERT INTO acesso VALUES ('$login','$senha','$privilegio')")or die(mysql_error());
-					echo "<script>alert('Usuario Cadastrado com sucesso!');</script>";
-					echo "<script>location.href='usuarios.php';</script>";
-				}
+				  echo "<script>location.href='../agenda.php';</script>";
+                }
+                if(isset($_POST["excluir"])){
+                    $data = $_POST["data"];
+                    $id = NULL;
+                    $query = mysqli_query($conect,"DELETE FROM agenda WHERE data = '$data'") or die(mysql_error());
+                    echo "<script> alert('Usuario Removido com sucesso!'); </script>";
+                    echo "<script> window.location='../agenda.php';</script>"; 
+                }
 				 
 				if(isset($_POST["acao"])){
 					switch ($_POST["acao"]){
-						case "consultar":
-							$login = $_POST["login1"];
-							$query = mysqli_query($conect,"SELECT * FROM acesso WHERE login = '$login'") or die(mysql_error());  
+					case "consultar":
+                        $data = $_POST["data1"];
+          	            $hora = $_POST["hora1"];
+                            
+							$query = mysqli_query($conect,"SELECT * FROM agenda WHERE data = '$data' and hora = '$hora'") or die(mysql_error());  
 							$result = mysqli_num_rows($query);
 							if($result == 0){
-                                ?>
-                                <form class="form-signin" name="form1" id="form1" method="POST" action="#">
-								<h2 class="form-signin-heading">Dados do Evento - Consultar</h2>
-								<center>
-								<label for="inputLogin" >Login</label>
-								<input type="text" name="login" id="login" class="form-control" style ='width:150px;text-align:center' value="<?php echo $login;?>" readonly /></br>
-								<label for="inputEvento" >Senha</label>
-								<input type="password" name="senha" id="senha" class="form-control" style ='width:150px;text-align:center'  /></br>	
-								<label for="inputEvento" >Privilégio</label>
-                                <select type="text" name="privilegio" id="privilegio" class="form-control" style ='width:150px;text-align:center'  /></br>
-                                    <option value="Master">Master</option>
-                                    <option value="Usuario">Usuario</option>
-                                    </select><br>	
-                                <button  type="submit" name="incluir" id="incluir" style ='width:200px'/>Incluir</button>							
-								<button  type="submit" name="cancelar" id="cancelar" style ='width:200px'/>Retornar</button>
-								</center>
-                              </form>
-                              <?php					
+								echo "<script> alert('Data ou horario não encontrado!!'); </script>";
+								echo "<script> window.location='../agenda.php';</script>"; 	
 							}
 							else{
 								$registro = mysqli_fetch_row($query);
-								$login = $registro[0];
-								$senha = $registro[1];
-								$privilegio = $registro[2];
+								$data = $registro[1];
+								$hora = $registro[2];
+                                $evento = $registro[3];
+                                $local = $registro[4];
 								?>
 								<form class="form-signin" name="form1" id="form1" method="POST" action="#">
 								<h2 class="form-signin-heading">Dados do Evento - Consultar</h2>
 								<center>
-								<label for="inputLogin" >Login</label>
-								<input type="text" name="login" id="login" class="form-control" style ='width:150px;text-align:center' value="<?php echo $login;?>" readonly /></br>
-								<label for="inputEvento" >Senha</label>
-								<input type="password" name="senha" id="senha" class="form-control" style ='width:150px;text-align:center' value="<?php echo $senha;?>" readonly /></br>	
-								<label for="inputEvento" >Privilégio</label>
-								<input type="text" name="privilegio" id="privilegio" class="form-control" style ='width:150px;text-align:center' value="<?php echo $privilegio;?>" readonly /></br>									
-								<button  type="submit" name="cancelar" id="cancelar" style ='width:200px'/>Retornar</button>
+								<label for="inputLogin" >Data</label>
+								<input type="text" name="data" id="data" class="form-control" style ='width:150px;text-align:center' value="<?php echo $data;?>" readonly /></br>
+								<label for="inputEvento" >Horario</label>
+								<input type="text" name="hora" id="hora" class="form-control" style ='width:150px;text-align:center' value="<?php echo $hora;?>" readonly /></br>	
+								<label for="inputEvento" >Evento</label>
+								<input type="text" name="evento" id="evento" class="form-control" style ='width:150px;text-align:center' value="<?php echo $evento;?>" readonly /></br>
+                                <label for="inputEvento" >Local</label>
+								<input type="text" name="local" id="local" class="form-control" style ='width:150px;text-align:center' value="<?php echo $local;?>" readonly /></br>									
+								<button  type="submit" name="cancelar" id="cancelar" style ='width:auto'/>Retornar</button>
+								<button  type="submit" name="excluir" id="excluir" style ='width:auto'/>Excluir</button>
 								</center>
 							  </form>		
 						
