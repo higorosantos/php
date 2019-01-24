@@ -75,7 +75,7 @@ if ($_SESSION["pri"] == "Master"  && $_SESSION["acesso"] == 1){
 								<label for="inputLogin" >Data</label>
 								<input type="text" name="data" id="data" class="form-control" style ='width:150px;text-align:center' value="<?php echo $data;?>" readonly /></br>
 								<label for="inputEvento" >Horario</label>
-								<input type="text" name="hora" id="hora" class="form-control" style ='width:150px;text-align:center' value="<?php echo $hora;?>" reandonly /></br>	
+								<input type="text" name="hora" id="hora" class="form-control" style ='width:150px;text-align:center' value="<?php echo $hora;?>" readonly /></br>	
 								<label for="inputEvento" >Evento</label>
                                 <input type="text" name="evento" id="evento" class="form-control" style ='width:150px;text-align:center'  /></br>
                                 <label for="inputEvento" >Local</label>
